@@ -7,19 +7,36 @@ import lombok.Data;
 import org.springframework.stereotype.Repository;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Repository
 @Data
 public class ToDoRepo {
 
-   private final List<ToDo> toDoList = new ArrayList<>();
+   private final Map<String, ToDo> toDoList = new HashMap<>();
 
-   public ToDo addToDo(String task){
-       ToDo toDo = new ToDo(task);
-       toDoList.add(toDo);
-       return toDo;
+
+   public List<ToDo> allToDos(){
+       return new ArrayList<>(toDoList.values());
+    }
+
+   public ToDo addToDo(ToDo task){
+       toDoList.put(task.getId(), task);
+       return task;
    }
+
+    public ToDo getActualTask(String id) {
+       return toDoList.get(id);
+    }
+
+    public List<ToDo> getActualTask(String id, ToDo todo) {
+       toDoList.put(id, todo);
+        return allToDos();
+    }
+
+    public List<ToDo> deleteToDo(String id) {
+       toDoList.remove(id);
+       return allToDos();
+    }
 }
