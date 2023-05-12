@@ -2,14 +2,14 @@ package de.neuefische.backend.service;
 
 import de.neuefische.backend.model.ToDo;
 import de.neuefische.backend.repo.ToDoRepo;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class KanbanService {
 
     private final ToDoRepo toDoRepo;
@@ -20,9 +20,14 @@ public class KanbanService {
         return toDoRepo.allToDos();
     }
 
-    public ToDo addToDo(ToDo task) {
+/*    public ToDo addToDo(ToDo task) {
             task.setId(uuid.getRandomId());
             return toDoRepo.addToDo(task);
+    }
+*/
+
+    public ToDo addToDo(ToDo task){
+        return toDoRepo.addToDo(task.withId(uuid.getRandomId()));
     }
 
     public ToDo getActualTask(String id){
@@ -36,4 +41,5 @@ public class KanbanService {
     public List<ToDo> deleteTodo(String id) {
         return toDoRepo.deleteToDo(id);
     }
-}
+
+}//end class

@@ -35,8 +35,16 @@ public class ToDoRepo {
         return allToDos();
     }
 
+/*    public ToDo editToDo(String id, ToDo todo) {
+        if (todo.getId().equals(id)) {
+            toDoList.put(id, todo);
+            return todo;
+        } else throw new IllegalArgumentException("Id of task and id in path do not match");
+    }
+*/
+
     public List<ToDo> deleteToDo(String id) {
        toDoList.remove(id);
        return allToDos();
     }
-}
+}//end class
